@@ -56,6 +56,8 @@ Every time you merge a PR into the main/alpha/beta branch, a new release could b
 - `refactor: Refactor code` - This will not create a release.
 - `perf: Improve performance` - This will not create a release.
 
+> Semantic Release always starts versions at `1.0.0`, it's just the way it works... see this [issue](https://github.com/semantic-release/semantic-release/issues/1507).
+
 Merges into the main branch will produce a release tag such as `1.2.1`, while merges into the alpha/beta branch will produce a prerelease tag such as `1.2.1-alpha.3`.
 
 ### Build Assets
