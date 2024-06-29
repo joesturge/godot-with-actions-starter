@@ -4,6 +4,16 @@
 
 Welcome to the Godot With Actions Starter! This repository provides a template for creating games using the Godot game engine. It includes a set of essential files and directories to help you manage and develop your Godot project effectively.
 
+### How to use template
+
+To use this repository as a template for creating a new repository on GitHub, follow these steps:
+
+1. Click on the "Use this template" button at the top of the repository page.
+2. Choose a name for your new repository and select the desired visibility (public or private).
+3. Click on the "Create repository from template" button.
+
+Once the new repository is created, you can clone it to your local machine and start working on your project using the provided template files and directories.
+
 ### Project Files
 
 Here are the important files and directories you'll find in this project:
