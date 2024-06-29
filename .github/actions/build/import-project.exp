@@ -1,0 +1,32 @@
+#!/usr/bin/expect -f
+
+proc timeout_handler {} {
+    puts "No output for 10 seconds, terminating..."
+    exit 0
+}
+
+# Initialize the timeout
+set timeout 10
+
+# Import the project
+spawn godot --headless --editor --verbose --path [exec pwd]
+
+# Keep track of the process ID
+set pid $spawn_id
+
+# Set up an event loop to monitor the process output and reset the timeout
+while {1} {
+    expect {
+        -i $pid \
+        timeout {
+            timeout_handler
+        }
+        eof {
+            puts "Process completed."
+            exit 0
+        }
+        -re . {
+            set timeout 10
+        }
+    }
+}

@@ -1,0 +1,14 @@
+name: Test
+description: Test
+runs:
+  using: composite
+  steps:
+    - name: Run tests
+      shell: bash
+      run: godot -s --headless res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a test/ci --ignoreHeadlessMode
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-report
+        path: reports/

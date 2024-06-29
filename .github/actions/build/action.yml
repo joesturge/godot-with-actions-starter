@@ -1,0 +1,30 @@
+name: Build
+description: Build
+runs:
+  using: composite
+  steps:      
+    - name: Install Dependencies
+      shell: bash
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libfontconfig expect
+
+    - name: Read godot-version file
+      id: getversion
+      shell: bash
+      run: echo "version=$(head -n 1 .godot-version)" >> $GITHUB_OUTPUT
+
+    - name: Setup Godot
+      uses: chickensoft-games/setup-godot@v1
+      with:
+        version: ${{ steps.getversion.outputs.version }}
+        use-dotnet: false
+        include-templates: true
+
+    - name: Install Plugins
+      shell: bash
+      run: godot --headless -s plug.gd install || true
+
+    - name: Import Project
+      shell: bash
+      run: expect .github/actions/build/import-project.exp

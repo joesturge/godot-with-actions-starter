@@ -1,0 +1,41 @@
+name: Release project
+on:
+    push:
+        branches:
+            - main
+    workflow_dispatch:
+
+jobs:
+  release:
+    name: Release
+    runs-on: self-hosted
+    defaults:
+      run:
+        shell: bash
+
+    permissions:
+        contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - uses: actions4git/setup-git@v1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Build, and test Project
+      - name: Build
+        uses: ./.github/actions/build
+      - name: Test
+        uses: ./.github/actions/test
+
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        with: 
+          extra_plugins: |
+            - "@semantic-release/exec"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
