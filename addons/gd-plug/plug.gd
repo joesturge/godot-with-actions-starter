@@ -1,3 +1,5 @@
+## Copyright (c) 2021 Tan Jian Ping
+
 @tool
 extends SceneTree
 
