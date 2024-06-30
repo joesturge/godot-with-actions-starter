@@ -104,7 +104,7 @@ godot --export-release --headless "Web" "build/index.html"
 
 To run the built app, you have two options:
 
-1. Export the app using the steps mentioned above. Alternatively, you can download the artifacts from the [workflow](https://github.com/joesturge/godotenv-test/actions) page. Please note that you need to have [Node.js](https://nodejs.org/en/download/package-manager) installed.
+1. Export the app using the steps mentioned above. Alternatively, you can download the build asset from the releses page. Please note that you need to have [Node.js](https://nodejs.org/en/download/package-manager) installed.
 
 2. Once you have the built app, navigate to the `build` directory and run the following command:
 
