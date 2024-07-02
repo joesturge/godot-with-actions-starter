@@ -16,25 +16,13 @@
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "godot -s --headless version.gd ${nextRelease.version}"
+        "prepareCmd": "godot -s --headless export-project.gd ${nextRelease.version}"
       }
     ],
     [
       "@semantic-release/exec",
       {
-        "prepareCmd": "mkdir -p build"
-      }
-    ],
-    [
-      "@semantic-release/exec",
-      {
-        "prepareCmd": "godot --export-release --headless \"Web\" \"build/index.html\""
-      }
-    ],
-    [
-      "@semantic-release/exec",
-      {
-        "prepareCmd": "zip -r build.zip -j ./build"
+        "prepareCmd": "./zip-exports.sh build builds.zip"
       }
     ],
     [
@@ -47,7 +35,7 @@
       "@semantic-release/github",
       {
         "assets": [
-          { "path": "build.zip", "label": "build" },
+          { "path": "builds.zip", "label": "Builds" },
           { "path": "CHANGELOG.md", "label": "CHANGELOG" }
         ]
       }

@@ -4,6 +4,10 @@
 
 Welcome to the Godot With Actions Starter! This repository provides a template for creating games using the Godot game engine. It includes a set of essential files and directories to help you manage and develop your Godot project effectively.
 
+## Godot support
+
+Verified with `Godot 4.2.2-stable`.
+
 ### How to use template
 
 To use this repository as a template for creating a new repository on GitHub, follow these steps:
@@ -18,14 +22,16 @@ Once the new repository is created, you can clone it to your local machine and s
 
 Here are the important files and directories you'll find in this project:
 
-- `.godot-version`: This file specifies the version of Godot to use in GitHub Actions. Make sure you have the same version installed locally.
-- `version.gd`: This script is responsible for applying version updates to the `project.godot` file. It helps manage the versioning of your project.
-- `plug.gd`: In this file, you can define the addons you want to use in your project. You can find more information about addons and how to use them [here](https://github.com/imjp94/gd-plug).
-- `CHANGELOG.md`: This file is automatically updated with release notes every time a new version is released. It helps you keep track of the changes made to your project over time.
-- `.releaserc.json`: This file contains the configuration for [semantic-release](https://github.com/semantic-release/semantic-release). Semantic release automates the versioning and release process based on your commit messages.
-- `test/ci/test_example.gd`: This is an example test written using GdUnit4. Tests located under the `test/ci` directory will be executed in GitHub Actions. GdUnit4 is a testing framework for Godot that helps you ensure the quality of your code.
-- `Scenes/Main/Main.tscn`: This is an example scene that renders the current version of your game. You can use this as a starting point to build your game's main scene.
-- `.github/`: This directory contains all the GitHub Actions workflows for your project. GitHub Actions allow you to automate various tasks and workflows in your development process.
+- [.godot-version](.godot-version): This file specifies the version of Godot to use in GitHub Actions. Make sure you have the same version installed locally.
+- [export-project.gd](export-project.gd): This script is responsible for applying version updates to the `project.godot` file and running the exports of the presets defined in `export_presets.cfg`
+- [plug.gd](plug.gd): In this file, you can define the addons you want to use in your project. You can find more information about addons and how to use them [here](https://github.com/imjp94/gd-plug).
+- [CHANGELOG.md](CHANGELOG.md): This file is automatically updated with release notes every time a new version is released. It helps you keep track of the changes made to your project over time.
+- [.releaserc.json](.releaserc.json): This file contains the configuration for [semantic-release](https://github.com/semantic-release/semantic-release). Semantic release automates the versioning and release process based on your commit messages.
+- [zip-exports.sh](zip-exports.sh)L This file is executed by `.releaserc.json` to zip the build exports into a single zip file.
+- [test/ci/test_example.gd](test/ci/test_example.gd): This is an example test written using GdUnit4. Tests located under the `test/ci` directory will be executed in GitHub Actions. GdUnit4 is a testing framework for Godot that helps you ensure the quality of your code.
+- [Scenes/Main/Main.tscn](Scenes/Main/Main.tscn): This is an example scene that renders the current version of your game. You can use this as a starting point to build your game's main scene.
+- [.github/](.github/): This directory contains all the GitHub Actions workflows for your project. GitHub Actions allow you to automate various tasks and workflows in your development process.
+
 
 These files and directories are essential for managing and developing your Godot project. Make sure to familiarize yourself with them as you work on your game.
 
@@ -62,7 +68,7 @@ Merges into the main branch will produce a release tag such as `1.2.1`, while me
 
 ### Build Assets
 
-Every release comes with a `build.zip` asset this can be uploaded to [itch.io](https://itch.io) as a HTML5 game.
+Every release comes with a `builds.zip`, it contains the builds for each platform as a zip. For example the web.zip can be uploaded to [itch.io](https://itch.io) as a HTML5 game.
 
 ## Development Setup
 
@@ -93,21 +99,9 @@ godot --headless -s plug.gd install
 godot -s --headless res://addons/gdUnit4/bin/GdUnitCmdTool.gd -a test/ci --ignoreHeadlessMode
 ```
 
-7. To export the game, run the following:
+7. To export the game (to web for example), run the following:
 
 ```bash
 mkdir -p build
 godot --export-release --headless "Web" "build/index.html"
-```
-
-### Running the Built App
-
-To run the built app, you have two options:
-
-1. Export the app using the steps mentioned above. Alternatively, you can download the build asset from the releses page. Please note that you need to have [Node.js](https://nodejs.org/en/download/package-manager) installed.
-
-2. Once you have the built app, navigate to the `build` directory and run the following command:
-
-```bash
-npx statikk --port 8000 --coi
 ```
